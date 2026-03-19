@@ -10,7 +10,7 @@ namespace ConsoleApp1
         private string autor { get; set;  }
         private int anio { get; set; }
         private string estado { get; set; }
-        public Libro(string titulo_, string autor_, int anio_, string estado_)
+        public Libro(string titulo_, string autor_, int anio_, string estado_= "disponible")
         {
             string[] estados = { "disponible", "prestado" };
             titulo = titulo_;
