@@ -35,13 +35,13 @@
                         BuscarLibro();
                         break;
                     case 4:
-                        MarcarPrestado();
+                        PersonaB.MarcarPrestado();
                         break;
                     case 5:
-                        MarcarDevuelto();
+                        PersonaB.MarcarDevuelto();
                         break;
                     case 6:
-                        MostrarPrestados();
+                        PersonaB.MostrarPrestados();
                         break;
                     case 0:
                         Console.WriteLine("Saliendo...");
@@ -53,37 +53,6 @@
 
             } while (opcion != 0);
         }
-
-        // Métodos (puedes implementarlos aparte según la división del trabajo)
-
-        static void AñadirLibro()
-        {
-            Console.WriteLine("Función añadir libro");
-        }
-
-        static void ListarLibros()
-        {
-            Console.WriteLine("Función listar libros");
-        }
-
-        static void BuscarLibro()
-        {
-            Console.WriteLine("Función buscar libro");
-        }
-
-        static void MarcarPrestado()
-        {
-            Console.WriteLine("Función marcar como prestado");
-        }
-
-        static void MarcarDevuelto()
-        {
-            Console.WriteLine("Función marcar como devuelto");
-        }
-
-        static void MostrarPrestados()
-        {
-            Console.WriteLine("Función mostrar prestados");
-        }
+       
     }
 }
