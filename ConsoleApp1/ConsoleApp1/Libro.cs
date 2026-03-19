@@ -13,11 +13,10 @@ namespace ConsoleApp1
         public Libro(string titulo_, string autor_, int anio_, string estado_)
         {
             string[] estados = { "disponible", "prestado" };
-
             titulo = titulo_;
             autor = autor_;
             anio = anio_;
-            estado = estado_;
+            estado = estados.Contains(estado_.ToLower()) ? estado_ : estados[0];
 
         }
     }
