@@ -1,4 +1,5 @@
-﻿namespace ConsoleApp1
+﻿using System.Collections;
+namespace ConsoleApp1
 {
     internal class Program
     {
@@ -11,7 +12,7 @@
 
         // Métodos (puedes implementarlos aparte según la división del trabajo)
 
-        static Libro[] libros = new Libro[100];
+        List <Libro>libros = new List<Libro>();
         static int contador = 0;
         public static void IniciarBiblioteca()
         {
