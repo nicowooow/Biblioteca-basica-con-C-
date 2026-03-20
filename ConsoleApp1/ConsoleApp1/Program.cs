@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleApp1
 {
@@ -65,6 +66,7 @@ namespace ConsoleApp1
         }
         static void AñadirLibro()
         {
+            Console.WriteLine("Función Añadir libro");
             Console.Write("- Titulo del libro : ");
             string titulo = Console.ReadLine();
             Console.Write("- Autor del libro : ");
@@ -104,8 +106,8 @@ namespace ConsoleApp1
         static void MarcarPrestado()
         {
             Console.WriteLine("Función marcar como prestado");            
-            Console.Write("Que libro quieres prestar: ");
-            int numero_libro = int.Parse(Console.ReadLine());
+            Console.Write("Que libro quieres prestar: ");            
+            int numero_libro = int.Parse(Console.ReadLine()) - 1;
             libros[numero_libro].estado = "prestado";
         }
 
@@ -123,7 +125,7 @@ namespace ConsoleApp1
             foreach (var item in libros)
             {
                 if (item.estado == "prestado") {
-                    Console.WriteLine(item);
+                    Console.WriteLine($"{item}.- {item.titulo}  ({item.estado})");
                 }
 
             }
