@@ -69,6 +69,7 @@ namespace ConsoleApp1
         }
         static void AñadirLibro()
         {
+            Console.WriteLine("------------------------");
             Console.WriteLine("Función Añadir libro");
             string titulo;
             do
@@ -93,7 +94,9 @@ namespace ConsoleApp1
                 Console.WriteLine("Introduce un año válido.");
             }
             libros.Add(new Libro(titulo, autor, anio));
+            Console.WriteLine("------------------------");
             Console.WriteLine("Libro añadido correctamente.");
+            Console.WriteLine("------------------------");
         }
 
         static void ListarLibros()
