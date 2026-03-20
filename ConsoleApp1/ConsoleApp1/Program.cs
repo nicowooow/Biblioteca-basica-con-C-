@@ -30,7 +30,12 @@ namespace ConsoleApp1
                 Console.WriteLine("0. Salir");
                 Console.Write("Elige una opción: ");
 
-                opcion = int.Parse(Console.ReadLine());
+                //opcion = int.Parse(Console.ReadLine());
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 0 || opcion > 6)
+                {
+                    Console.WriteLine("Introduce un número válido entre 0 y 6.");
+                    Console.Write("Elige una opción: ");
+                }
 
                 switch (opcion)
                 {
@@ -64,15 +69,31 @@ namespace ConsoleApp1
         }
         static void AñadirLibro()
         {
-            Console.WriteLine("------------------------");
-            Console.Write("- Titulo del libro : ");
-            string titulo = Console.ReadLine();
-            Console.Write("- Autor del libro : ");
-            string autor = Console.ReadLine();
-            Console.Write("- Año de publicación del libro : ");
-            int anio = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Función Añadir libro");
+            string titulo;
+            do
+            {
+                Console.Write("- Título del libro: ");
+                titulo = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(titulo));
+            string autor;
+            do
+            {
+                Console.Write("- Autor del libro: ");
+                autor = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(autor));
+            int anio;
+            while (true)
+            {
+                Console.Write("- Año de publicación del libro: ");
+                if (int.TryParse(Console.ReadLine(), out anio))
+                {
+                    break;
+                }
+                Console.WriteLine("Introduce un año válido.");
+            }
             libros.Add(new Libro(titulo, autor, anio));
-            Console.WriteLine("------------------------");
+            Console.WriteLine("Libro añadido correctamente.");
         }
 
         static void ListarLibros()
