@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleApp1
 {
     internal class Program
@@ -64,16 +65,39 @@ namespace ConsoleApp1
         }
         static void AñadirLibro()
         {
+            Console.Write("- Titulo del libro : ");
+            string titulo = Console.ReadLine();
+            Console.Write("- Autor del libro : ");
+            string autor = Console.ReadLine();
+            Console.Write("- Año de publicación del libro : ");
+            int anio = Convert.ToInt32( Console.ReadLine());
             Console.WriteLine("Función añadir libro");
+
+            libros.Add(new Libro(titulo, autor,anio));
         }
 
         static void ListarLibros()
         {
+            int posicion = 0;
+
+            libros.ForEach(libro=>
+            {
+                posicion++;
+                Console.WriteLine($"{posicion}.- {libro.titulo}  ({libro.estado})");
+            });
             Console.WriteLine("Función listar libros");
         }
 
         static void BuscarLibro()
         {
+            Console.Write("Ingrese el número del libro que dessea buscar : ");
+            int posicion = Convert.ToInt32(Console.ReadLine()) - 1;
+            if (libros.Count == 0)
+            {
+                Console.WriteLine("La bibliotea no cuenta con libros aun ...");
+                return;
+            }
+            Console.WriteLine($"Titulo : {libros[posicion].titulo} \nAutor : {libros[posicion].autor} \nAño: {libros[posicion].anio} \nEstado: {libros[posicion].estado}");
             Console.WriteLine("Función buscar libro");
         }
 
