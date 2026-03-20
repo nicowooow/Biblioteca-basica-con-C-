@@ -12,7 +12,7 @@ namespace ConsoleApp1
 
         // Métodos (puedes implementarlos aparte según la división del trabajo)
 
-        List <Libro>libros = new List<Libro>();
+        static List <Libro>libros = new List<Libro>();
         static int contador = 0;
         public static void IniciarBiblioteca()
         {
@@ -44,13 +44,13 @@ namespace ConsoleApp1
                         BuscarLibro();
                         break;
                     case 4:
-                        PersonaB.MarcarPrestado();
+                        MarcarPrestado();
                         break;
                     case 5:
-                        PersonaB.MarcarDevuelto();
+                        MarcarDevuelto();
                         break;
                     case 6:
-                        PersonaB.MostrarPrestados();
+                        MostrarPrestados();
                         break;
                     case 0:
                         Console.WriteLine("Saliendo...");
@@ -79,17 +79,31 @@ namespace ConsoleApp1
 
         static void MarcarPrestado()
         {
-            Console.WriteLine("Función marcar como prestado");
+            Console.WriteLine("Función marcar como prestado");            
+            Console.Write("Que libro quieres prestar: ");
+            int numero_libro = int.Parse(Console.ReadLine());
+            libros[numero_libro].estado = "prestado";
         }
 
         static void MarcarDevuelto()
         {
             Console.WriteLine("Función marcar como devuelto");
+            Console.Write("Que libro quieres devolver: ");
+            int numero_libro = int.Parse(Console.ReadLine());
+            libros[numero_libro].estado = "disponible";
         }
 
         static void MostrarPrestados()
         {
             Console.WriteLine("Función mostrar prestados");
+            foreach (var item in libros)
+            {
+                if (item.estado == "prestado") {
+                    Console.WriteLine(item);
+                }
+
+            }
+
         }
     }
 }
