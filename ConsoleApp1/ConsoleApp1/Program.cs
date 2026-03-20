@@ -32,7 +32,12 @@ namespace ConsoleApp1
                 Console.WriteLine("0. Salir");
                 Console.Write("Elige una opción: ");
 
-                opcion = int.Parse(Console.ReadLine());
+                //opcion = int.Parse(Console.ReadLine());
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 0 || opcion > 6)
+                {
+                    Console.WriteLine("Introduce un número válido entre 0 y 6.");
+                    Console.Write("Elige una opción: ");
+                }
 
                 switch (opcion)
                 {
@@ -67,19 +72,35 @@ namespace ConsoleApp1
         static void AñadirLibro()
         {
             Console.WriteLine("Función Añadir libro");
-            Console.Write("- Titulo del libro : ");
-            string titulo = Console.ReadLine();
-            Console.Write("- Autor del libro : ");
-            string autor = Console.ReadLine();
-            Console.Write("- Año de publicación del libro : ");
-            int anio = Convert.ToInt32( Console.ReadLine());
-            Console.WriteLine("Función añadir libro");
-
-            libros.Add(new Libro(titulo, autor,anio));
+            string titulo;
+            do
+            {
+                Console.Write("- Título del libro: ");
+                titulo = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(titulo));
+            string autor;
+            do
+            {
+                Console.Write("- Autor del libro: ");
+                autor = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(autor));
+            int anio;
+            while (true)
+            {
+                Console.Write("- Año de publicación del libro: ");
+                if (int.TryParse(Console.ReadLine(), out anio))
+                {
+                    break;
+                }
+                Console.WriteLine("Introduce un año válido.");
+            }
+            libros.Add(new Libro(titulo, autor, anio));
+            Console.WriteLine("Libro añadido correctamente.");
         }
 
         static void ListarLibros()
         {
+            Console.WriteLine("Función listar libros");
             int posicion = 0;
 
             libros.ForEach(libro=>
@@ -87,7 +108,7 @@ namespace ConsoleApp1
                 posicion++;
                 Console.WriteLine($"{posicion}.- {libro.titulo}  ({libro.estado})");
             });
-            Console.WriteLine("Función listar libros");
+            
         }
 
         static void BuscarLibro()
@@ -109,6 +130,7 @@ namespace ConsoleApp1
             Console.Write("Que libro quieres prestar: ");            
             int numero_libro = int.Parse(Console.ReadLine()) - 1;
             libros[numero_libro].estado = "prestado";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
         static void MarcarDevuelto()
@@ -117,19 +139,36 @@ namespace ConsoleApp1
             Console.Write("Que libro quieres devolver: ");
             int numero_libro = int.Parse(Console.ReadLine());
             libros[numero_libro].estado = "disponible";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
+        /*
         static void MostrarPrestados()
         {
             Console.WriteLine("Función mostrar prestados");
+
+            for (int i = 0; i < libros.Count; i++)
+            {
+                if (libros[i].estado == "prestado")
+                {
+                    Console.WriteLine($"{i}.- {libros[i].titulo} ({libros[i].estado})");
+                }
+            }
+        }
+        */
+        static void MostrarPrestados()
+        {
+            Console.WriteLine("Función mostrar prestados");
+            int indice = 0;
+
             foreach (var item in libros)
             {
-                if (item.estado == "prestado") {
-                    Console.WriteLine($"{item}.- {item.titulo}  ({item.estado})");
+                if (item.estado == "prestado")
+                {
+                    Console.WriteLine($"{indice+1}.- {item.titulo} ({item.estado})");
                 }
-
+                indice++;
             }
-
         }
     }
 }
