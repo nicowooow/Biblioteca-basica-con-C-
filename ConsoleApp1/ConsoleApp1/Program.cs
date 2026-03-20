@@ -97,6 +97,8 @@ namespace ConsoleApp1
         }
 
         static void ListarLibros()
+            /*En listado ponemos solo posicion titulo y estado, para ver autor y año se ve con la busqueda individual,
+             pero se podria poner para que saliera todo*/
         {
             Console.WriteLine("------------------------");
             int posicion = 0;
@@ -125,7 +127,7 @@ namespace ConsoleApp1
             switch (opcion)
             {
                 case 1:
-                    Console.Write("Ingrese el número del libro que dessea buscar : ");
+                    Console.Write("Ingrese el número del libro que desea buscar : ");
                     int posicion = Convert.ToInt32(Console.ReadLine()) - 1;
                     if (libros.Count == 0)
                     {
