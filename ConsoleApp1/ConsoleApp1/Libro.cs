@@ -6,11 +6,11 @@ namespace ConsoleApp1
 {
     public class Libro
     {
-        private string titulo { get; set; }
-        private string autor { get; set;  }
-        private int anio { get; set; }
-        private string estado { get; set; }
-        public Libro(string titulo_, string autor_, int anio_, string estado_= "disponible")
+        public string titulo { get; set; }
+        public string autor { get; set; }
+        public int anio { get; set; }
+        public string estado { get; set; }
+        public Libro(string titulo_, string autor_, int anio_, string estado_ = "disponible")
         {
             string[] estados = { "disponible", "prestado" };
             titulo = titulo_;
@@ -19,5 +19,7 @@ namespace ConsoleApp1
             estado = estados.Contains(estado_.ToLower()) ? estado_ : estados[0];
 
         }
+
+
     }
 }

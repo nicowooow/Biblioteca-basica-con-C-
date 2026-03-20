@@ -1,4 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleApp1
 {
     internal class Program
@@ -12,7 +14,7 @@ namespace ConsoleApp1
 
         // Métodos (puedes implementarlos aparte según la división del trabajo)
 
-        List <Libro>libros = new List<Libro>();
+        static List <Libro>libros = new List<Libro>();
         static int contador = 0;
         public static void IniciarBiblioteca()
         {
@@ -30,7 +32,12 @@ namespace ConsoleApp1
                 Console.WriteLine("0. Salir");
                 Console.Write("Elige una opción: ");
 
-                opcion = int.Parse(Console.ReadLine());
+                //opcion = int.Parse(Console.ReadLine());
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 0 || opcion > 6)
+                {
+                    Console.WriteLine("Introduce un número válido entre 0 y 6.");
+                    Console.Write("Elige una opción: ");
+                }
 
                 switch (opcion)
                 {
@@ -64,32 +71,104 @@ namespace ConsoleApp1
         }
         static void AñadirLibro()
         {
-            Console.WriteLine("Función añadir libro");
+            Console.WriteLine("Función Añadir libro");
+            string titulo;
+            do
+            {
+                Console.Write("- Título del libro: ");
+                titulo = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(titulo));
+            string autor;
+            do
+            {
+                Console.Write("- Autor del libro: ");
+                autor = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(autor));
+            int anio;
+            while (true)
+            {
+                Console.Write("- Año de publicación del libro: ");
+                if (int.TryParse(Console.ReadLine(), out anio))
+                {
+                    break;
+                }
+                Console.WriteLine("Introduce un año válido.");
+            }
+            libros.Add(new Libro(titulo, autor, anio));
+            Console.WriteLine("Libro añadido correctamente.");
         }
 
         static void ListarLibros()
         {
             Console.WriteLine("Función listar libros");
+            int posicion = 0;
+
+            libros.ForEach(libro=>
+            {
+                posicion++;
+                Console.WriteLine($"{posicion}.- {libro.titulo}  ({libro.estado})");
+            });
+            
         }
 
         static void BuscarLibro()
         {
+            Console.Write("Ingrese el número del libro que dessea buscar : ");
+            int posicion = Convert.ToInt32(Console.ReadLine()) - 1;
+            if (libros.Count == 0)
+            {
+                Console.WriteLine("La bibliotea no cuenta con libros aun ...");
+                return;
+            }
+            Console.WriteLine($"Titulo : {libros[posicion].titulo} \nAutor : {libros[posicion].autor} \nAño: {libros[posicion].anio} \nEstado: {libros[posicion].estado}");
             Console.WriteLine("Función buscar libro");
         }
 
         static void MarcarPrestado()
         {
-            Console.WriteLine("Función marcar como prestado");
+            Console.WriteLine("Función marcar como prestado");            
+            Console.Write("Que libro quieres prestar: ");            
+            int numero_libro = int.Parse(Console.ReadLine()) - 1;
+            libros[numero_libro].estado = "prestado";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
         static void MarcarDevuelto()
         {
             Console.WriteLine("Función marcar como devuelto");
+            Console.Write("Que libro quieres devolver: ");
+            int numero_libro = int.Parse(Console.ReadLine());
+            libros[numero_libro].estado = "disponible";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
+        /*
         static void MostrarPrestados()
         {
             Console.WriteLine("Función mostrar prestados");
+
+            for (int i = 0; i < libros.Count; i++)
+            {
+                if (libros[i].estado == "prestado")
+                {
+                    Console.WriteLine($"{i}.- {libros[i].titulo} ({libros[i].estado})");
+                }
+            }
+        }
+        */
+        static void MostrarPrestados()
+        {
+            Console.WriteLine("Función mostrar prestados");
+            int indice = 0;
+
+            foreach (var item in libros)
+            {
+                if (item.estado == "prestado")
+                {
+                    Console.WriteLine($"{indice+1}.- {item.titulo} ({item.estado})");
+                }
+                indice++;
+            }
         }
     }
 }
