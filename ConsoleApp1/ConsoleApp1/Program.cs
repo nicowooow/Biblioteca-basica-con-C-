@@ -160,16 +160,48 @@ namespace ConsoleApp1
         static void MarcarPrestado()
         {
             Console.WriteLine("Función marcar como prestado");
+            Console.Write("Que libro quieres prestar: ");
+            int numero_libro = int.Parse(Console.ReadLine()) - 1;
+            libros[numero_libro].estado = "prestado";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
         static void MarcarDevuelto()
         {
             Console.WriteLine("Función marcar como devuelto");
+            Console.Write("Que libro quieres devolver: ");
+            int numero_libro = int.Parse(Console.ReadLine());
+            libros[numero_libro].estado = "disponible";
+            Console.WriteLine($"{numero_libro}.- {libros[numero_libro].titulo}  ({libros[numero_libro].estado})");
         }
 
+        /*
         static void MostrarPrestados()
         {
             Console.WriteLine("Función mostrar prestados");
+
+            for (int i = 0; i < libros.Count; i++)
+            {
+                if (libros[i].estado == "prestado")
+                {
+                    Console.WriteLine($"{i}.- {libros[i].titulo} ({libros[i].estado})");
+                }
+            }
+        }
+        */
+        static void MostrarPrestados()
+        {
+            Console.WriteLine("Función mostrar prestados");
+            int indice = 0;
+
+            foreach (var item in libros)
+            {
+                if (item.estado == "prestado")
+                {
+                    Console.WriteLine($"{indice + 1}.- {item.titulo} ({item.estado})");
+                }
+                indice++;
+            }
         }
     }
 }
