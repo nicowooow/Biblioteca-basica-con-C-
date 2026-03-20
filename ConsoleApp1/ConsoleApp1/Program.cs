@@ -2,10 +2,18 @@
 {
     internal class Program
     {
-        static Libro[] libros = new Libro[100];
-        static int contador = 0;
+
 
         static void Main(string[] args)
+        {
+            IniciarBiblioteca();
+        }
+
+        // Métodos (puedes implementarlos aparte según la división del trabajo)
+
+        static Libro[] libros = new Libro[100];
+        static int contador = 0;
+        public static void IniciarBiblioteca()
         {
             int opcion;
 
@@ -53,6 +61,34 @@
 
             } while (opcion != 0);
         }
-       
+        static void AñadirLibro()
+        {
+            Console.WriteLine("Función añadir libro");
+        }
+
+        static void ListarLibros()
+        {
+            Console.WriteLine("Función listar libros");
+        }
+
+        static void BuscarLibro()
+        {
+            Console.WriteLine("Función buscar libro");
+        }
+
+        static void MarcarPrestado()
+        {
+            Console.WriteLine("Función marcar como prestado");
+        }
+
+        static void MarcarDevuelto()
+        {
+            Console.WriteLine("Función marcar como devuelto");
+        }
+
+        static void MostrarPrestados()
+        {
+            Console.WriteLine("Función mostrar prestados");
+        }
     }
 }
