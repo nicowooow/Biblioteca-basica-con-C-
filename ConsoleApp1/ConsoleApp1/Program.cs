@@ -2,10 +2,18 @@
 {
     internal class Program
     {
-        static Libro[] libros = new Libro[100];
-        static int contador = 0;
+
 
         static void Main(string[] args)
+        {
+            IniciarBiblioteca();
+        }
+
+        // Métodos (puedes implementarlos aparte según la división del trabajo)
+
+        static Libro[] libros = new Libro[100];
+        static int contador = 0;
+        public static void IniciarBiblioteca()
         {
             int opcion;
 
@@ -53,9 +61,6 @@
 
             } while (opcion != 0);
         }
-
-        // Métodos (puedes implementarlos aparte según la división del trabajo)
-
         static void AñadirLibro()
         {
             Console.WriteLine("Función añadir libro");
